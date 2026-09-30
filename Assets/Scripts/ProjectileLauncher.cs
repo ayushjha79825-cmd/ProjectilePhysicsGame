@@ -76,25 +76,16 @@ public class ProjectileLauncher : MonoBehaviour
         }
     }
 
-    // Helper method: Converts Screen Drag into World Direction
-    Vector3 CalculateWorldDirection(Vector3 drag)
+   
     {
-        // Camera directions relative to world
-        Vector3 camForward = Camera.main.transform.forward;
+     Vector3 camForward = Camera.main.transform.forward;
         Vector3 camRight = Camera.main.transform.right;
-
-        // Ground plane flat directions (no upward rotation tilt)
         camForward.y = 0f;
         camRight.y = 0f;
         camForward.Normalize();
         camRight.Normalize();
-
-        // Screen X drives Left/Right (camRight)
-        // Screen Y drives Forward/Backward (camForward)
-        // Upward arc (Y) can be added as an offset if needed
         Vector3 direction = (camRight * drag.x) + (camForward * drag.y);
 
-        // Agar aap chahte ho ki Drag upar karne se thoda height angle (arc) bhi bane:
         direction.y = drag.y * 0.5f;
 
         return direction;
